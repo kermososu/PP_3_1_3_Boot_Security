@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Моя старница</title>
+</head>
+<body>
+
+
+<h1>Welcome на вашу старницу!</h1>
+<h3>
+<label for="name">Ваш username</label>
+<div th:text="${user.getUsername()}" id="name"/>
+    <br>
+<label for="Email">Ваш Email</label>
+<div th:text="${user.getEmail()}" id="Email"/>
+    <br>
+<label for="Password">Ваш Password</label>
+<div th:text="${user.getPassword()}" id="Password"/>
+    <br>
+<label for="Roles">Ваша Roles</label>
+<div th:text="${user.getRoles()}" id="Roles"/>
+</h3>
+
+<hr>
+<a href="/"> <button>Main page</button></a> <div th:insert="index :: copy"></div>
+
+
+</body>
+</html>

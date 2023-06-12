@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>MAIN PAGE!</title>
+</head>
+<body>
+
+
+<h1>Welcome to MAIN PAGE!</h1>
+
+
+
+<div sec:authorize="${!isAuthenticated()}">
+    <a href="/login"> <button>Войти</button></a> <a href="/registration"> <button>Зарегистрироваться</button></a>
+</div>
+
+<div sec:authorize="${hasRole('ADMIN')}"><a href="/admin"><button>Моя страница</button></a></div>
+<div sec:authorize="${hasRole('USER')}"><a href="/user"><button>Моя страница</button></a></div>
+
+<div th:fragment="copy" sec:authorize="${isAuthenticated()}">
+<a href="/logout"> <button>Выйти</button></a>
+</div>
+
+
+
+
+</body>
+</html>
