@@ -26,7 +26,10 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        roleRepository.save(new Role("ROLE_ADMIN"));
+        if (!roleRepository.existsById(1L)) {
+            roleRepository.save(new Role("ROLE_ADMIN"));
+            roleRepository.save(new Role("ROLE_USER"));
+        }
     }
 
     @Override
@@ -37,7 +40,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
         return true;
@@ -51,8 +53,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
-        User userMerge = userRepository.getById(user.getId());
-        user.setRoles(userMerge.getRoles());
         userRepository.save(user);
     }
 

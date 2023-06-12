@@ -22,6 +22,18 @@
     <input type="password" th:field="*{password}" th:value="*{getPassword()}" id="email"/>
     <br>
 
+    <p>
+        <label>Roles:
+            <select name="roles" multiple size="2">
+                <option
+                        th:each="role : ${allRoles}"
+                        th:text="${role.name}"
+                        th:value="${role.id}"
+                        th:field="*{roles}"
+                />
+            </select>
+        </label>
+    </p>
 
     <br>
     <input type="submit" value="Создать"/>
